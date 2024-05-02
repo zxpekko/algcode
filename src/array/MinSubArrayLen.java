@@ -34,8 +34,10 @@ public class MinSubArrayLen {
     public static void main(String[] args) {
         MinSubArrayLen minSubArrayLen = new MinSubArrayLen();
         MinSubArrayLenⅡ minSubArrayLenⅡ = new MinSubArrayLenⅡ();
-        System.out.println(minSubArrayLenⅡ.minSubArrayLen(7, new int[]{2, 3, 1, 2, 4, 3}));
-        System.out.println(minSubArrayLen.minSubArrayLen(7, new int[]{2, 3, 1, 2, 4, 3}));
+        System.out.println(minSubArrayLenⅡ.minSubArrayLen(7, new int[]{7, 3, 1, 2, 4, 3}));
+        System.out.println(minSubArrayLen.minSubArrayLen(7, new int[]{7, 3, 1, 2, 4, 3}));
+        MinSubArrayLen1 minSubArrayLen1 = new MinSubArrayLen1();
+        System.out.println(minSubArrayLen1.minSubArrayLen(7, new int[]{7, 3, 1, 2, 4, 3}));
     }
     public int minSubArrayLen(int target, int[] nums){
         int min=Integer.MAX_VALUE;
@@ -76,6 +78,27 @@ class MinSubArrayLenⅡ{
             if(min==Integer.MAX_VALUE)
                 return 0;
             current-=nums[left];
+        }
+        return min;
+    }
+}
+class MinSubArrayLen1{
+    public int minSubArrayLen(int target, int[] nums){
+        int n=nums.length;
+        int min=Integer.MAX_VALUE;
+        int left=0,right=0;
+        int sum=nums[left];
+        while (right<n){
+            if(sum>=target){
+                min=Math.min(min,right-left+1);
+                sum-=nums[left];
+                left++;
+            }
+            else{
+                right++;
+                if(right<n)
+                    sum+=nums[right];
+            }
         }
         return min;
     }

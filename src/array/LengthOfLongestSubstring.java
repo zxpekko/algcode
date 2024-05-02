@@ -15,6 +15,10 @@ public class LengthOfLongestSubstring {
         System.out.println(lengthOfLongestSubstring.lengthOfLongestSubstringⅢ("abcda"));
         LengthOfLongestSubstringⅡ lengthOfLongestSubstringⅡ = new LengthOfLongestSubstringⅡ();
         System.out.println(lengthOfLongestSubstringⅡ.lengthOfLongestSubstring("abcda"));
+        LengthOfLongestSubstring1 lengthOfLongestSubstring1 = new LengthOfLongestSubstring1();
+        System.out.println(lengthOfLongestSubstring1.lengthOfLongestSubstring("aaaa"));
+        LengthOfLongestSubstring2 lengthOfLongestSubstring2 = new LengthOfLongestSubstring2();
+        System.out.println(lengthOfLongestSubstring2.lengthOfLongestSubstring("abcda"));
     }
     public int lengthOfLongestSubstring(String s){
         int right=-1;
@@ -97,6 +101,53 @@ class LengthOfLongestSubstringⅡ{
             }
             result=Math.max(result,right-i+1);
         }
+        return result;
+    }
+}
+class LengthOfLongestSubstring1{
+    public int lengthOfLongestSubstring(String s){
+        int right=-1,result=0;
+        int l=0,r=0;
+        HashSet<Character> record=new HashSet<>();
+        for(int i=0;i<s.length();i++){
+            if(i!=0)
+                record.remove(s.charAt(i-1));
+            while (right+1<s.length()&&!record.contains(s.charAt(right+1))){
+                record.add(s.charAt(right+1));
+                right++;
+            }
+            if(result<right-i+1){
+                result=right-i+1;
+                l=i;
+                r=right;
+            }
+//            result=Math.max(result,right-i+1);
+        }
+        String substring = s.substring(l, r + 1);
+        System.out.println(substring);
+        return result;
+    }
+}
+class LengthOfLongestSubstring2{
+    public int lengthOfLongestSubstring(String s){
+        int right=-1,result=0;
+        int l=0,r=0;
+        HashSet<Character> record=new HashSet<>();
+        for(int i=0;i<s.length();i++){
+            if(i!=0)
+                record.remove(s.charAt(i-1));
+            while (right+1<s.length()&&!record.contains(s.charAt(right+1))){
+                record.add(s.charAt(right+1));
+                right++;
+            }
+            if(result<right-i+1){
+                result=right-i+1;
+                l=i;
+                r=right;
+            }
+        }
+        String substring = s.substring(l, r + 1);
+        System.out.println(substring);
         return result;
     }
 }

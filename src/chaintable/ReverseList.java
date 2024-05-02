@@ -1,5 +1,7 @@
 package chaintable;
 
+import com.sun.org.apache.bcel.internal.generic.LUSHR;
+
 /**
  * @Author:zxp
  * @Description:给你单链表的头节点 head ，请你反转链表，并返回反转后的链表。
@@ -74,6 +76,31 @@ class ReverseListⅡ{
             cur.next=pre;
             pre=cur;
             cur=temp;
+        }
+        return pre;
+    }
+}
+class ReverseList1{
+    public ListNode reverseList(ListNode head){
+        ListNode pre=null;
+        ListNode cur=head;
+        while (cur!=null){
+            ListNode temp=cur.next;
+            cur.next=pre;
+            pre=cur;
+            cur=temp;
+        }
+        return pre;
+    }
+}
+class ReverseList2{
+    public ListNode reverseList(ListNode head){
+        ListNode cur=head,pre=null;
+        while (cur!=null){
+            ListNode next=cur.next;
+            cur.next=pre;
+            pre=cur;
+            cur=next;
         }
         return pre;
     }
