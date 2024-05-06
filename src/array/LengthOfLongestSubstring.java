@@ -19,6 +19,10 @@ public class LengthOfLongestSubstring {
         System.out.println(lengthOfLongestSubstring1.lengthOfLongestSubstring("aaaa"));
         LengthOfLongestSubstring2 lengthOfLongestSubstring2 = new LengthOfLongestSubstring2();
         System.out.println(lengthOfLongestSubstring2.lengthOfLongestSubstring("abcda"));
+        LengthOfLongestSubstring3 lengthOfLongestSubstring3 = new LengthOfLongestSubstring3();
+        System.out.println(lengthOfLongestSubstring3.lengthOfLongestSubstring("abcda"));
+        LengthOfLongestSubstring4 lengthOfLongestSubstring4 = new LengthOfLongestSubstring4();
+        System.out.println(lengthOfLongestSubstring4.lengthOfLongestSubstring("abcda"));
     }
     public int lengthOfLongestSubstring(String s){
         int right=-1;
@@ -148,6 +152,41 @@ class LengthOfLongestSubstring2{
         }
         String substring = s.substring(l, r + 1);
         System.out.println(substring);
+        return result;
+    }
+}
+class LengthOfLongestSubstring3{
+    public int lengthOfLongestSubstring(String s){
+        int n=s.length();
+        int right=-1;
+        int result=0;
+        HashSet<Character> record=new HashSet<>();
+        for(int i=0;i<n;i++){
+            if(i!=0)
+                record.remove(s.charAt(i-1));
+            while (right+1<n&&!record.contains(s.charAt(right+1))){
+                record.add(s.charAt(right+1));
+                right++;
+            }
+            result=Math.max(result,right-i+1);
+        }
+        return result;
+    }
+}
+class LengthOfLongestSubstring4{
+    public int lengthOfLongestSubstring(String s){
+        int result=0;
+        int right=-1;
+        HashSet<Character> record=new HashSet<>();
+        for(int i=0;i<s.length();i++){
+            if(i!=0)
+                record.remove(s.charAt(i-1));
+            while (right+1<s.length()&&!record.contains(s.charAt(right+1))){
+                record.add(s.charAt(right+1));
+                right++;
+            }
+            result=Math.max(result,right-i+1);
+        }
         return result;
     }
 }

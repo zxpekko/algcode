@@ -38,6 +38,8 @@ public class MinSubArrayLen {
         System.out.println(minSubArrayLen.minSubArrayLen(7, new int[]{7, 3, 1, 2, 4, 3}));
         MinSubArrayLen1 minSubArrayLen1 = new MinSubArrayLen1();
         System.out.println(minSubArrayLen1.minSubArrayLen(7, new int[]{7, 3, 1, 2, 4, 3}));
+        MinSubArrayLen2 minSubArrayLen2 = new MinSubArrayLen2();
+        System.out.println(minSubArrayLen2.minSubArrayLen(7, new int[]{7, 3, 1, 2, 4, 3}));
     }
     public int minSubArrayLen(int target, int[] nums){
         int min=Integer.MAX_VALUE;
@@ -101,5 +103,26 @@ class MinSubArrayLen1{
             }
         }
         return min;
+    }
+}
+class MinSubArrayLen2{
+    public int minSubArrayLen(int target, int[] nums){
+        int result=Integer.MAX_VALUE;
+        int n=nums.length;
+        int right=-1;
+        int curSum=0,i=0;
+        while (right<n){
+            if(curSum>=target){
+                result=Math.min(result,right-i+1);
+                curSum-=nums[i];
+                i++;
+            }
+            else {
+                right++;
+                if(right<n)
+                    curSum+=nums[right];
+            }
+        }
+        return result==Integer.MAX_VALUE?0:result;
     }
 }

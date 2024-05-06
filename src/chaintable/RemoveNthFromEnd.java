@@ -76,3 +76,26 @@ class RemoveNthFromEndⅡ{
         return head;
     }
 }
+class RemoveNthFromEnd1{
+    public ListNode removeNthFromEnd(ListNode head, int n){
+        int length=0;
+        ListNode p=head;
+        while (p!=null){
+            length++;
+            p=p.next;
+        }
+        int index=length-n+1;
+        if(index==1)
+            return head.next;
+        ListNode cur=head;
+        ListNode pre=null;
+        int curIndex=1;
+        while (curIndex<index){
+            pre=cur;
+            cur=cur.next;
+            curIndex++;
+        }
+        pre.next=cur.next;
+        return head;
+    }
+}
