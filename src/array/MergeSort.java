@@ -109,3 +109,32 @@ class MergeSort2{
             arr[index++]=copy[r++];
     }
 }
+class MergeSort3{
+    public int[] mergeSort(int[] arr,int left,int right){
+        if(left<right){
+            int mid=(left+right)/2;
+            mergeSort(arr,left,mid);
+            mergeSort(arr,mid+1,right);
+            merge(arr,left,right,mid);
+        }
+        return arr;
+    }
+    public void merge(int[] arr,int left,int right,int mid){
+        int n=arr.length;
+        int[] copy = new int[n];
+        for(int i=0;i<n;i++)
+            copy[i]=arr[i];
+        int l=left,r=mid+1;
+        int index=left;
+        while (l<=mid&&r<=right){
+            if(copy[l]<=copy[r])
+                arr[index++]=copy[l++];
+            else
+                arr[index++]=copy[r++];
+        }
+        while (l<=mid)
+            arr[index++]=copy[l++];
+        while (r<=right)
+            arr[index++]=copy[r++];
+    }
+}

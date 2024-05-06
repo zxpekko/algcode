@@ -78,4 +78,12 @@ class LowestCommonAncestorBSTⅢ{
             return lowestCommonAncestor(root.left,p,q);
         else return root;
     }
+    public TreeNode lowestCommonAncestorⅡ(TreeNode root, TreeNode p, TreeNode q){
+        if(root==null)
+            return root;
+        if(p.val>root.val&&q.val>root.val)
+            lowestCommonAncestorⅡ(root.right,p,q);
+//        else if()
+            return null;
+    }
 }

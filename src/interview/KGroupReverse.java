@@ -50,3 +50,29 @@ class ListNode{
     }
 
 }
+class KGroupReverse1{
+    public ListNode reverseKGroup(ListNode head, int k){
+        ListNode dummy=new ListNode(0);
+        dummy.next=head;
+        ListNode cur=head;
+        ListNode pre=dummy;
+        int size=0;
+        while (cur!=null){
+            size++;
+            cur=cur.next;
+        }
+        while (size>=k){
+            cur=pre.next;
+            ListNode next=cur.next;
+            for(int i=1;i<k;i++){
+                cur.next=next.next;
+                next.next=pre.next;
+                pre.next=next;
+                next=cur.next;
+            }
+            pre=cur;
+            size-=k;
+        }
+        return dummy.next;
+    }
+}
