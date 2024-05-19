@@ -21,6 +21,11 @@ public class Heap {
         Prioriuty1 prioriuty1 = new Prioriuty1();
         int[] k = prioriuty1.getK(new int[]{2, 3, 8, 1, 4, 9, 10, 7, 16, 14}, 3);
         System.out.println(Arrays.toString(k));
+        Heap3 heap3 = new Heap3();
+        int[] ints3 = heap3.heapSort(new int[]{2, 3, 8, 1, 4, 9, 10, 7, 16, 14});
+        System.out.println(Arrays.toString(ints3));
+        Priority1 priority1 = new Priority1();
+        System.out.println(priority1.prioritySort(new int[]{2, 3, 8, 1, 4, 9, 10, 7, 16, 14}, 3));
     }
 
     public void heapfy(int[] arr, int n, int i) {
@@ -188,5 +193,61 @@ class Heap2{
             heapfy(arr,i,0);
         }
         return arr;
+    }
+}
+class Heap3{
+    public void heapfy(int[] arr,int n,int i){
+        int left=2*i+1;
+        int right=2*i+2;
+        int largest=i;
+        if(left<n&&arr[largest]<arr[left])
+            largest=left;
+        if(right<n&&arr[largest]<arr[right])
+            largest=right;
+        if(largest!=i){
+            int temp=arr[largest];
+            arr[largest]=arr[i];
+            arr[i]=temp;
+            heapfy(arr,n,largest);
+        }
+    }
+    public int[] heapSort(int[] arr){
+        int n=arr.length;
+        for(int i=n/2-1;i>=0;i--)
+            heapfy(arr,n,i);
+        for(int i=n-1;i>=0;i--){
+            int temp=arr[0];
+            arr[0]=arr[i];
+            arr[i]=temp;
+            heapfy(arr,i,0);
+        }
+        return arr;
+    }
+}
+class Priority1{
+    public int prioritySort(int[] arr,int k){
+        PriorityQueue<Integer> priorityQueue=new PriorityQueue<>(new Comparator<Integer>(){
+            @Override
+            public int compare(Integer o1,Integer o2){
+                return o1-o2;
+            }
+        });
+        PriorityQueue<Integer> q=new PriorityQueue<>(new Comparator<Integer>(){
+            @Override
+            public int compare(Integer o1,Integer o2){
+                return o1-o2;
+            }
+        });
+        for(int i=0;i<arr.length;i++){
+            if(priorityQueue.size()<k)
+                priorityQueue.offer(arr[i]);
+            else {
+                if(arr[i]>priorityQueue.peek()){
+                    priorityQueue.poll();
+                    priorityQueue.offer(arr[i]);
+                }
+            }
+        }
+        return priorityQueue.peek();
     }
 }

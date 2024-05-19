@@ -12,21 +12,42 @@ import java.util.Stack;
  * @Date:11:04 2024/4/4
  */
 public class InOrder {
-    public void inOrder(TreeNode root){
-        Stack<TreeNode> stack = new Stack<>();
+//    public void inOrder(TreeNode root){这个中序遍历迭代法不正确。
+//        Stack<TreeNode> stack = new Stack<>();
+//        if(root==null)
+//            return;
+//        stack.push(root);
+//        List<Integer> result=new ArrayList<>();
+//        TreeNode cur=root;
+//        while (cur!=null||!stack.isEmpty()){
+//            if(cur!=null){
+//                cur=cur.left;
+//            }
+//            else {
+//                cur = stack.pop();
+//                result.add(cur.val);
+//                cur=cur.right;
+//            }
+//        }
+//    }
+}
+class Inorder1{
+    public void inorder(TreeNode root){
         if(root==null)
             return;
-        stack.push(root);
         List<Integer> result=new ArrayList<>();
+        Stack<TreeNode> stack=new Stack<>();
+//        stack.push(root);
         TreeNode cur=root;
         while (cur!=null||!stack.isEmpty()){
             if(cur!=null){
+                stack.push(cur);
                 cur=cur.left;
             }
             else {
-                cur = stack.pop();
-                result.add(cur.val);
-                cur=cur.right;
+                TreeNode pop = stack.pop();
+                result.add(pop.val);
+                cur=pop.right;
             }
         }
     }

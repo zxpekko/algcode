@@ -13,6 +13,7 @@ public class MergeSort {
         int[] arr = {14, 12, 15, 13, 11, 16};
         int[] arr1 = {14, 12, 15, 13, 11, 16};
         int[] arr2 = {14, 12, 15, 13, 11, 16};
+        int[] arr3 = {14, 12, 15, 13, 11, 16};
         mergeSort.mergeSort(arr,0,arr.length-1);
         System.out.println(Arrays.toString(arr));
         MergeSort1 mergeSort1 = new MergeSort1();
@@ -21,6 +22,9 @@ public class MergeSort {
         MergeSort2 mergeSort2 = new MergeSort2();
         mergeSort2.MergeSort(arr2,0,arr2.length-1);
         System.out.println(Arrays.toString(arr2));
+        MergeSort4 mergeSort4 = new MergeSort4();
+        int[] ints1 = mergeSort4.mergeSort(arr3, 0, arr3.length - 1);
+        System.out.println(Arrays.toString(ints1));
 
     }
     public void mergeSort(int[] arr,int low,int high){
@@ -129,6 +133,36 @@ class MergeSort3{
         while (l<=mid&&r<=right){
             if(copy[l]<=copy[r])
                 arr[index++]=copy[l++];
+            else
+                arr[index++]=copy[r++];
+        }
+        while (l<=mid)
+            arr[index++]=copy[l++];
+        while (r<=right)
+            arr[index++]=copy[r++];
+    }
+}
+class MergeSort4{
+    public int[] mergeSort(int[] arr,int left,int right){
+        if(left<right){
+            int mid=(left+right)/2;
+            mergeSort(arr,left,mid);
+            mergeSort(arr,mid+1,right);
+            merge(arr,left,right,mid);
+        }
+        return arr;
+    }
+    public void merge(int[] arr,int left,int right,int mid){
+        int n=arr.length;
+        int[] copy = new int[n];
+        for(int i=0;i<n;i++)
+            copy[i]=arr[i];
+        int l=left,r=mid+1;
+        int index=left;
+        while (l<=mid&&r<=right){
+            if(copy[l]<=copy[r]){
+                arr[index++]=copy[l++];
+            }
             else
                 arr[index++]=copy[r++];
         }
