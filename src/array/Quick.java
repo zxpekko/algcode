@@ -21,6 +21,9 @@ public class Quick {
         Quick3 quick31 = new Quick3();
         int[] ints2 = quick31.quickSort(new int[]{2, 3, 8, 1, 4, 9, 10, 7, 16, 14});
         System.out.println(Arrays.toString(ints2));
+        Quick4 quick4 = new Quick4();
+        int[] ints3 = quick4.quickSort(new int[]{2, 3, 8, 1, 4, 9, 10, 7, 16, 14});
+        System.out.println(Arrays.toString(ints3));
     }
     public int[] quickSort(int[] arr){
         quick(arr,0,arr.length-1);
@@ -100,6 +103,32 @@ class Quick2{
     }
 }
 class Quick3{
+    public int[] quickSort(int[] arr){
+        quick(arr,0,arr.length-1);
+        return arr;
+    }
+    public void quick(int[] arr,int left,int right){
+        if(left>=right)
+            return;
+        int l=left,r=right;
+        int pivot=arr[left];
+        while (l<r){
+            while (l<r&&arr[r]>=pivot)
+                r--;
+            if(l<r)
+                arr[l]=arr[r];
+            while (l<r&&arr[l]<=pivot)
+                l++;
+            if(l<r)
+                arr[r]=arr[l];
+            if(l==r)
+                arr[r]=pivot;
+        }
+        quick(arr,left,r-1);
+        quick(arr,r+1,right);
+    }
+}
+class Quick4{
     public int[] quickSort(int[] arr){
         quick(arr,0,arr.length-1);
         return arr;

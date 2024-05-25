@@ -12,6 +12,8 @@ public class Solution216 {
     public static void main(String[] args) {
         Solution216 solution216 = new Solution216();
         System.out.println(solution216.combinationSum3(3, 100));
+        Solution216Ⅰ solution216Ⅰ = new Solution216Ⅰ();
+        System.out.println(solution216Ⅰ.combinationSum3(3, 25));
     }
     public List<List<Integer>> combinationSum3(int k, int n){
         int max=0,min=0;
@@ -39,6 +41,37 @@ public class Solution216 {
             subResult.add(i);
             dfs(n-i,k,i+1,result,subResult);
             subResult.remove(subResult.size()-1);
+        }
+    }
+}
+class Solution216Ⅰ{
+    List<List<Integer>> result=new ArrayList<>();
+    List<Integer> subResult=new ArrayList<>();
+    public List<List<Integer>> combinationSum3(int k, int n){
+        int min=0;
+        int max=0;
+        for(int i=1;i<=k;i++)
+            min+=i;
+        for(int i=9;i>=9-k+1;i--)
+            max+=i;
+        if(n<min||n>max)
+            return result;
+        dfs(k,n,1);
+        return result;
+    }
+    public void dfs(int k,int n,int start){
+        if(subResult.size()==k&&n==0){
+            result.add(new ArrayList<>(subResult));
+            return;
+        }
+        if(subResult.size()==k)
+            return;
+        for(int i=start;i<=9;i++){
+            subResult.add(i);
+            n-=i;
+            dfs(k,n,i+1);
+            subResult.remove(subResult.size()-1);
+            n+=i;
         }
     }
 }

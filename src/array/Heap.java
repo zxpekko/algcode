@@ -26,6 +26,9 @@ public class Heap {
         System.out.println(Arrays.toString(ints3));
         Priority1 priority1 = new Priority1();
         System.out.println(priority1.prioritySort(new int[]{2, 3, 8, 1, 4, 9, 10, 7, 16, 14}, 3));
+        Heap4 heap4 = new Heap4();
+        int[] ints4 = heap4.heapSort(new int[]{2, 3, 8, 1, 4, 9, 10, 7, 16, 14});
+        System.out.println(Arrays.toString(ints4));
     }
 
     public void heapfy(int[] arr, int n, int i) {
@@ -249,5 +252,35 @@ class Priority1{
             }
         }
         return priorityQueue.peek();
+    }
+}
+class Heap4{
+    public void heapfy(int[] arr,int n,int i){
+        int left=2*i+1;
+        int right=2*i+2;
+        int largest=i;
+        if(left<n&&arr[largest]<arr[left])
+            largest=left;
+        if(right<n&&arr[largest]<arr[right])
+            largest=right;
+        if(largest!=i){
+            int temp=arr[i];
+            arr[i]=arr[largest];
+            arr[largest]=temp;
+            heapfy(arr,n,largest);
+        }
+    }
+    public int[] heapSort(int[] arr){
+        int n=arr.length;
+        for(int i=n/2-1;i>=0;i--){
+            heapfy(arr,n,i);
+        }
+        for(int i=n-1;i>=0;i--){//交换并维护
+            int temp=arr[0];
+            arr[0]=arr[i];
+            arr[i]=temp;
+            heapfy(arr,i,0);
+        }
+        return arr;
     }
 }

@@ -1,7 +1,10 @@
 package backtracking;
 
+import leetcode.LargestRectangleArea;
+
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.List;
 
 /**
@@ -13,6 +16,8 @@ public class Solution40 {
     public static void main(String[] args) {
         Solution40 solution40 = new Solution40();
         System.out.println(solution40.combinationSum2(new int[]{10, 1, 2, 7, 6, 1, 5}, 8));
+        Solution40Ⅰ solution40Ⅰ = new Solution40Ⅰ();
+        System.out.println(solution40Ⅰ.combinationSum2(new int[]{10, 1, 2, 7, 6, 1, 5}, 8));
     }
     public List<List<Integer>> combinationSum2(int[] candidates, int target){
         Arrays.sort(candidates);
@@ -37,6 +42,35 @@ public class Solution40 {
             dfs(candidates,target-candidates[i],i+1,result,subResult,record);
             subResult.remove(subResult.size()-1);
             record[i]=false;
+        }
+    }
+}
+class Solution40Ⅰ{
+    List<List<Integer>> result=new ArrayList<>();
+    List<Integer> subResult=new ArrayList<>();
+    public List<List<Integer>> combinationSum2(int[] candidates, int target){
+        Arrays.sort(candidates);
+        boolean[] record = new boolean[candidates.length];
+        dfs(candidates,target,0,record);
+        return result;
+    }
+    public void dfs(int[] candidates,int target,int start,boolean[] record){
+        if(target==0){
+            result.add(new ArrayList<>(subResult));
+            return;
+        }
+        if(target<0)
+            return;
+        for(int i=start;i<candidates.length;i++){
+            if(i!=start&&candidates[i]==candidates[i-1]&&!record[i-1])
+                continue;
+            subResult.add(candidates[i]);
+            record[i]=true;
+            target-=candidates[i];
+            dfs(candidates,target,i+1,record);
+            subResult.remove(subResult.size()-1);
+            record[i]=false;
+            target+=candidates[i];
         }
     }
 }

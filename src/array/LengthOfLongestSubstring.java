@@ -23,6 +23,10 @@ public class LengthOfLongestSubstring {
         System.out.println(lengthOfLongestSubstring3.lengthOfLongestSubstring("abcda"));
         LengthOfLongestSubstring4 lengthOfLongestSubstring4 = new LengthOfLongestSubstring4();
         System.out.println(lengthOfLongestSubstring4.lengthOfLongestSubstring("abcda"));
+        LengthOfLongestSubstring5 lengthOfLongestSubstring5 = new LengthOfLongestSubstring5();
+        System.out.println(lengthOfLongestSubstring5.lengthOfLongestSubstring("abcda"));
+        LengthOfLongestSubstring6 lengthOfLongestSubstring6 = new LengthOfLongestSubstring6();
+        System.out.println(lengthOfLongestSubstring6.lengthOfLongestSubstring("abcda"));
     }
     public int lengthOfLongestSubstring(String s){
         int right=-1;
@@ -182,6 +186,41 @@ class LengthOfLongestSubstring4{
             if(i!=0)
                 record.remove(s.charAt(i-1));
             while (right+1<s.length()&&!record.contains(s.charAt(right+1))){
+                record.add(s.charAt(right+1));
+                right++;
+            }
+            result=Math.max(result,right-i+1);
+        }
+        return result;
+    }
+}
+class LengthOfLongestSubstring5{
+    public int lengthOfLongestSubstring(String s){
+        int n=s.length();
+        int right=-1;
+        HashSet<Character> record=new HashSet<>();
+        int result=0;
+        for(int i=0;i<n;i++){
+            if(i!=0)
+                record.remove(s.charAt(i-1));
+            while (right+1<n&&!record.contains(s.charAt(right+1))){
+                record.add(s.charAt(right+1));
+                right++;
+            }
+            result=Math.max(result,right-i+1);
+        }
+        return result;
+    }
+}
+class LengthOfLongestSubstring6{
+    public int lengthOfLongestSubstring(String s){
+        int n=s.length();
+        HashSet<Character> record=new HashSet<>();
+        int right=-1,result=0;
+        for(int i=0;i<n;i++){
+            if(i!=0)
+                record.remove(s.charAt(i-1));
+            while (right+1<n&&!record.contains(s.charAt(right+1))){
                 record.add(s.charAt(right+1));
                 right++;
             }
