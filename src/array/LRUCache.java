@@ -40,8 +40,36 @@ public class LRUCache {
 //        cache.remove(key);
 //        cache.put(key,val);
 //    }
+//    int cap;
+//    LinkedHashMap<Integer,Integer> cache=new LinkedHashMap<>();
+//    public LRUCache(int capacity){
+//        this.cap=capacity;
+//    }
+//    public int get(int key){
+//        if(!cache.containsKey(key))
+//            return -1;
+//        makeRecently(key);
+//        return cache.get(key);
+//    }
+//    public void put(int key, int value){
+//        if(cache.containsKey(key)){
+//           makeRecently(key);
+//           cache.put(key,value);
+//           return;
+//        }
+//        if(cache.size()>=this.cap){
+//            Integer  oldest= cache.keySet().iterator().next();
+//            cache.remove(oldest);
+//        }
+//        cache.put(key,value);
+//    }
+//    public void makeRecently(int key){
+//        Integer value = cache.get(key);
+//        cache.remove(key);
+//        cache.put(key,value);
+//    }
     int cap;
-    LinkedHashMap<Integer,Integer> cache=new LinkedHashMap<>();
+    private LinkedHashMap<Integer,Integer> cache=new LinkedHashMap<>();
     public LRUCache(int capacity){
         this.cap=capacity;
     }
@@ -53,12 +81,12 @@ public class LRUCache {
     }
     public void put(int key, int value){
         if(cache.containsKey(key)){
-           makeRecently(key);
-           cache.put(key,value);
-           return;
+            makeRecently(key);
+            cache.put(key,value);
+            return;
         }
-        if(cache.size()>=this.cap){
-            Integer  oldest= cache.keySet().iterator().next();
+        if(cache.size()>=cap){
+            Integer oldest = cache.keySet().iterator().next();
             cache.remove(oldest);
         }
         cache.put(key,value);
@@ -68,4 +96,5 @@ public class LRUCache {
         cache.remove(key);
         cache.put(key,value);
     }
+
 }

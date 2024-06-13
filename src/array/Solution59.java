@@ -1,6 +1,7 @@
 package array;
 
 import javax.rmi.ssl.SslRMIClientSocketFactory;
+import java.io.CharArrayReader;
 import java.util.Arrays;
 
 /**
@@ -16,6 +17,10 @@ public class Solution59 {
         for(int i=0;i<ints.length;i++) {
             System.out.println(Arrays.toString(ints[i]));
         }
+        Solution59Ⅰ solution59Ⅰ = new Solution59Ⅰ();
+        int[][] ints1 = solution59Ⅰ.generateMatrix(3);
+        for(int[] array:ints1)
+            System.out.println(Arrays.toString(array));
     }
     public int[][] generateMatrix(int n){
         int[][] order={{0,1},{1,0},{0,-1},{-1,0}};
@@ -32,6 +37,28 @@ public class Solution59 {
                 original=(original+1)%4;
             row=row+order[original][0];
             column=column+order[original][1];
+        }
+        return result;
+    }
+}
+class Solution59Ⅰ{
+    int[][] directions={{0,1},{1,0},{0,-1},{-1,0}};
+    public int[][] generateMatrix(int n){
+        int[][] result = new int[n][n];
+        boolean[][] visited = new boolean[n][n];
+        int index=1;
+        int row=0,column=0;
+        int curDir=0;
+        while (index<=n*n){
+            result[row][column]=index;
+            visited[row][column]=true;
+            int curRow=row+directions[curDir][0];
+            int curCol=column+directions[curDir][1];
+            if(curRow<0||curRow>=n||curCol<0||curCol>=n||visited[curRow][curCol])
+                curDir=(curDir+1)%4;
+            row+=directions[curDir][0];
+            column+=directions[curDir][1];
+            index++;
         }
         return result;
     }
