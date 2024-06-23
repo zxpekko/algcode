@@ -1,5 +1,6 @@
 package binarytree;
 
+import com.sun.org.apache.bcel.internal.generic.ACONST_NULL;
 import com.sun.org.apache.bcel.internal.generic.NEW;
 
 import java.util.ArrayList;
@@ -27,5 +28,24 @@ public class PostOrder {
                 stack.push(pop.right);
         }
         //翻转
+    }
+}
+class PostOrderⅠ{
+    public List<Integer> postOrder(TreeNode root){
+        Stack<TreeNode> stack = new Stack<>();
+        stack.push(root);
+        List<Integer> result=new ArrayList<>();
+        List<Integer> midReuslt=new ArrayList<>();
+        while (!stack.isEmpty()){
+            TreeNode pop = stack.pop();
+            midReuslt.add(pop.val);
+            if(pop.left!=null)
+                stack.push(pop.left);
+            if(pop.right!=null)
+                stack.push(pop.right);
+        }
+        for(int i=midReuslt.size()-1;i>=0;i--)
+            result.add(midReuslt.get(i));
+        return result;
     }
 }

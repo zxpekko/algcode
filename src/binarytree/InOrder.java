@@ -52,3 +52,24 @@ class Inorder1{
         }
     }
 }
+class InorderⅠ{
+    public List<Integer> inorder(TreeNode root){
+        if(root==null)
+            return null;
+        List<Integer> result=new ArrayList<>();
+        Stack<TreeNode> stack = new Stack<>();
+        TreeNode cur=root;
+        while (!stack.isEmpty()||cur!=null){
+            if(cur!=null){
+                stack.push(cur);
+                cur=cur.left;
+            }
+            else {
+                TreeNode pop = stack.pop();
+                result.add(pop.val);
+                cur=pop.right;
+            }
+        }
+        return result;
+    }
+}

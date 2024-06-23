@@ -1,6 +1,7 @@
 package array;
 
 import java.util.Arrays;
+import java.util.InputMismatchException;
 
 /**
  * @Author:zxp
@@ -30,6 +31,9 @@ public class Dijkstra {
         Dijkstra3 dijkstra31 = new Dijkstra3();
         int[] dijkstra4 = dijkstra31.dijkstra(adj, 0);
         System.out.println(Arrays.toString(dijkstra4));
+        Dijkstra4 dijkstra41 = new Dijkstra4();
+        int[] dijkstra5 = dijkstra41.dijkstra(adj, 0);
+        System.out.println(Arrays.toString(dijkstra5));
     }
     public int[] dijkstra(int[][] adj,int source){
         int n=adj.length;
@@ -89,6 +93,27 @@ class Dijkstra3{
             }
             visited[k]=true;
             for(int m=0;m<n;m++){
+                if(shortest[k]+adj[k][m]<shortest[m])
+                    shortest[m]=shortest[k]+adj[k][m];
+            }
+        }
+        return shortest;
+    }
+}
+class Dijkstra4{
+    public int[] dijkstra(int[][] adj,int source){
+        int[] shortest = new int[adj.length];
+        Arrays.fill(shortest, Integer.MAX_VALUE/2);
+        boolean[] visited = new boolean[adj.length];
+        shortest[source]=0;
+        for(int i=0;i<adj.length;i++){
+            int k=-1;
+            for(int j=0;j<adj.length;j++){
+                if(!visited[j]&&(k==-1||shortest[j]<shortest[k]))
+                    k=j;
+            }
+            visited[k]=true;
+            for(int m=0;m<adj.length;m++){
                 if(shortest[k]+adj[k][m]<shortest[m])
                     shortest[m]=shortest[k]+adj[k][m];
             }

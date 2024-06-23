@@ -38,6 +38,10 @@ public class EditingDistance {
         int j = editingDistance.minDistanceⅡ("intention", "execution");
         System.out.println(i);
         System.out.println(j);
+        EditingDistance1 editingDistance1 = new EditingDistance1();
+        System.out.println(editingDistance1.minDistance("intention", "execution"));
+        EditingDistance2 editingDistance2 = new EditingDistance2();
+        System.out.println(editingDistance2.minDistance("intention", "execution"));
     }
 
     public int minDistance(String word1, String word2) {
@@ -77,6 +81,48 @@ public class EditingDistance {
                     dp[i][j]=dp[i-1][j-1];
                 else
                     dp[i][j]=Math.min(Math.min(dp[i-1][j]+1,dp[i-1][j-1]+1),dp[i][j-1]+1);//增加和删除是相反的操作，因此第一个和第三个递推公式已经包含。
+            }
+        }
+        return dp[m][n];
+    }
+}
+class EditingDistance1{
+    public int minDistance(String word1, String word2){
+        int m=word1.length();
+        int n=word2.length();
+        int[][] dp = new int[m+1][n+1];
+        for(int i=0;i<=m;i++)
+            dp[i][0]=i;
+        for(int j=0;j<=n;j++)
+            dp[0][j]=j;
+        for(int i=1;i<=m;i++){
+            for(int j=1;j<=n;j++){
+                if(word1.charAt(i-1)==word2.charAt(j-1))
+                    dp[i][j]=dp[i-1][j-1];
+                else
+                    dp[i][j]=Math.min(dp[i-1][j-1],Math.min(dp[i-1][j],dp[i][j-1]))+1;
+            }
+        }
+        return dp[m][n];
+    }
+}
+class EditingDistance2{
+    public int minDistance(String word1, String word2){
+        int m=word1.length();
+        int n=word2.length();
+        int[][] dp = new int[m + 1][n + 1];
+        for(int i=0;i<=m;i++){
+            dp[i][0]=i;
+        }
+        for(int j=0;j<=n;j++){
+            dp[0][j]=j;
+        }
+        for(int i=1;i<=m;i++){
+            for(int j=1;j<=n;j++){
+                if(word1.charAt(i-1)==word2.charAt(j-1))
+                    dp[i][j]=dp[i-1][j-1];
+                else
+                    dp[i][j]=Math.min(dp[i-1][j-1],Math.min(dp[i-1][j],dp[i][j-1]))+1;
             }
         }
         return dp[m][n];

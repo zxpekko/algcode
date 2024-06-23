@@ -23,4 +23,18 @@ public class PreOrder {
                 stack.push(pop.left);
         }
     }
+    public List<Integer> preOrderⅠ(TreeNode root){
+        Stack<TreeNode> stack = new Stack<>();
+        stack.push(root);
+        List<Integer> result=new ArrayList<>();
+        while (!stack.isEmpty()){
+            TreeNode pop = stack.pop();
+            result.add(pop.val);
+            if(pop.right!=null)
+                stack.push(pop.right);
+            if(pop.left!=null)
+                stack.push(pop.left);
+        }
+        return result;
+    }
 }

@@ -16,6 +16,9 @@ public class Solution300 {
         System.out.println(solution300Ⅰ.lengthOfLIS(new int[]{1, 3, 6, 7, 9, 4, 10, 5, 6}));
         Solution300Ⅱ solution300Ⅱ = new Solution300Ⅱ();
         System.out.println(solution300Ⅱ.lengthOfLIS(new int[]{1, 3, 6, 7, 9, 4, 10, 5, 6}));
+        Solution300Ⅲ solution300Ⅲ = new Solution300Ⅲ();
+        int i = solution300Ⅲ.lengthOfLIS(new int[]{1, 3, 6, 7, 9, 4, 10, 5, 6});
+        System.out.println(i);
     }
     public int lengthOfLIS(int[] nums){
         int n=nums.length;
@@ -64,6 +67,24 @@ class Solution300Ⅱ{
             }
         }
         int max=dp[0];
+        for(int i=0;i<n;i++)
+            max=Math.max(max,dp[i]);
+        return max;
+    }
+}
+class Solution300Ⅲ{
+    public int lengthOfLIS(int[] nums){
+        int n=nums.length;
+        int[] dp = new int[n];
+        Arrays.fill(dp,1);
+        for(int i=1;i<n;i++){
+            for(int j=0;j<i;j++){
+                if(nums[i]>nums[j]){
+                    dp[i]=Math.max(dp[i],dp[j]+1);
+                }
+            }
+        }
+        int max=0;
         for(int i=0;i<n;i++)
             max=Math.max(max,dp[i]);
         return max;

@@ -1,5 +1,7 @@
 package array;
 
+import org.junit.Test;
+
 import java.util.Arrays;
 
 /**
@@ -24,6 +26,13 @@ public class Quick {
         Quick4 quick4 = new Quick4();
         int[] ints3 = quick4.quickSort(new int[]{2, 3, 8, 1, 4, 9, 10, 7, 16, 14});
         System.out.println(Arrays.toString(ints3));
+        Quick5 quick5 = new Quick5();
+        int[] ints4 = quick5.quickSort(new int[]{2, 3, 8, 1, 4, 9, 10, 7, 16, 14});
+        System.out.println(Arrays.toString(ints4));
+        Quick6 quick6 = new Quick6();
+        int[] ints5 = quick6.quickSort(new int[]{2, 3, 8, 1, 4, 9, 10, 7, 16, 14});
+        System.out.println(Arrays.toString(ints5));
+
     }
     public int[] quickSort(int[] arr){
         quick(arr,0,arr.length-1);
@@ -48,6 +57,12 @@ public class Quick {
         }
         quick(arr,left,r-1);
         quick(arr,r+1,right);
+    }
+    @Test
+    public void test(){
+        String a="123";
+        StringBuilder stringBuilder=new StringBuilder();
+
     }
 }
 class Quick1{
@@ -129,6 +144,58 @@ class Quick3{
     }
 }
 class Quick4{
+    public int[] quickSort(int[] arr){
+        quick(arr,0,arr.length-1);
+        return arr;
+    }
+    public void quick(int[] arr,int left,int right){
+        if(left>=right)
+            return;
+        int l=left,r=right;
+        int pivot=arr[left];
+        while (l<r){
+            while (l<r&&arr[r]>=pivot)
+                r--;
+            if(l<r)
+                arr[l]=arr[r];
+            while (l<r&&arr[l]<=pivot)
+                l++;
+            if(l<r)
+                arr[r]=arr[l];
+            if(l==r)
+                arr[r]=pivot;
+        }
+        quick(arr,left,r-1);
+        quick(arr,r+1,right);
+    }
+}
+class Quick5{
+    public int[] quickSort(int[] arr){
+        quick(arr,0,arr.length-1);
+        return arr;
+    }
+    public void quick(int[] arr,int left,int right){
+        if(left>=right)
+            return;
+        int l=left,r=right;
+        int pivot=arr[left];
+        while (l<r){
+            while (l<r&&arr[r]>=pivot)
+                r--;
+            if(l<r)
+                arr[l]=arr[r];
+            while (l<r&&arr[l]<=pivot)
+                l++;
+            if(l<r)
+                arr[r]=arr[l];
+            if(l==r)
+                arr[r]=pivot;
+        }
+        quick(arr,left,r-1);
+        quick(arr,r+1,right);
+    }
+}
+class Quick6{
     public int[] quickSort(int[] arr){
         quick(arr,0,arr.length-1);
         return arr;

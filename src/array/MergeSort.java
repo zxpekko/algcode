@@ -18,6 +18,9 @@ public class MergeSort {
         int[] arr3 = {14, 12, 15, 13, 11, 16};
         int[] arr4 = {14, 12, 15, 13, 11, 16};
         int[] arr5 = {14, 12, 15, 13, 11, 16};
+        int[] arr6 = {14, 12, 15, 13, 11, 16};
+        int[] arr7 = {14, 12, 15, 13, 11, 16};
+        int[] arr8 = {14, 12, 15, 13, 11, 16};
         mergeSort.mergeSort(arr,0,arr.length-1);
         System.out.println(Arrays.toString(arr));
         MergeSort1 mergeSort1 = new MergeSort1();
@@ -34,6 +37,14 @@ public class MergeSort {
         System.out.println(Arrays.toString(ints2));
         PrioritySort prioritySort = new PrioritySort();
         System.out.println(prioritySort.getK(arr5, 3));
+        MergeSort6 mergeSort6 = new MergeSort6();
+        int[] ints3 = mergeSort6.mergeSort(arr6, 0, arr6.length - 1);
+        System.out.println(Arrays.toString(ints3));
+        MergeSort7 mergeSort7 = new MergeSort7();
+        int[] bubble = mergeSort7.bubble(arr7);
+        System.out.println(Arrays.toString(bubble));
+        int[] ints4 = mergeSort7.mergeSort(arr8, 0, arr8.length - 1);
+        System.out.println(Arrays.toString(ints4));
     }
     public void mergeSort(int[] arr,int low,int high){
         if(low<high){
@@ -228,4 +239,96 @@ class PrioritySort{
         return queue.peek();
     }
 
+}
+class MergeSort6{
+    public int[] mergeSort(int[] arr,int left,int right){
+        if(left<right){
+            int mid=(left+right)/2;
+            mergeSort(arr,left,mid);
+            mergeSort(arr,mid+1,right);
+            merge(arr,left,right,mid);
+        }
+        return arr;
+    }
+    public void merge(int[] arr,int left,int right,int mid){
+        int[] copy=new int[arr.length];
+        for(int i=left;i<=right;i++)
+            copy[i]=arr[i];
+        int l=left,r=mid+1,index=left;
+        while (l<=mid&&r<=right){
+            if(copy[l]<=copy[r])
+                arr[index++]=copy[l++];
+            else
+                arr[index++]=copy[r++];
+        }
+        while (l<=mid)
+            arr[index++]=copy[l++];
+        while (r<=right)
+            arr[index++]=copy[r++];
+    }
+}
+class MergeSort7{
+    public int[] bubble1(int[] arr){
+        int n=arr.length;
+        int flag=0;
+        for(int i=1;i<n;i++){
+            flag=0;
+            for(int j=0;j<n-i;j++){
+                if(arr[j]>arr[j+1]){
+                    int temp=arr[j];
+                    arr[j]=arr[j+1];
+                    arr[j+1]=temp;
+                    flag=1;
+                }
+            }
+            if(flag==0)
+                return arr;
+        }
+        return arr;
+    }
+    public int[] bubble(int[] arr){
+        int n=arr.length;
+        int flag=0;
+        for(int i=1;i<n-1;i++){
+            flag=0;
+            for(int j=0;j<n-i;j++){
+                if(arr[j]>arr[j+1]){
+                    int temp=arr[j];
+                    arr[j]=arr[j+1];
+                    arr[j+1]=temp;
+                    flag=1;
+                }
+            }
+            if(flag==0)
+                return arr;
+        }
+        return arr;
+    }
+    public int[] mergeSort(int[] arr,int left,int right){
+        if(left<right){
+            int mid=(left+right)/2;
+            mergeSort(arr,left,mid);
+            mergeSort(arr,mid+1,right);
+            merge(arr,left,right,mid);
+        }
+        return arr;
+    }
+    public void merge(int[] arr,int left,int right,int mid){
+        int n=arr.length;
+        int[] copy = new int[n];
+        for(int i=0;i<n;i++)
+            copy[i]=arr[i];
+        int index=left;
+        int l=left,r=mid+1;
+        while (l<=mid&&r<=right){
+            if(copy[l]<=copy[r])
+                arr[index++]=copy[l++];
+            else
+                arr[index++]=copy[r++];
+        }
+        while (l<=mid)
+            arr[index++]=copy[l++];
+        while (r<=right)
+            arr[index++]=copy[r++];
+    }
 }

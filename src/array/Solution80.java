@@ -19,6 +19,10 @@ public class Solution80 {
         Solution80Ⅰ solution80Ⅰ = new Solution80Ⅰ();
         System.out.println(solution80Ⅰ.removeDuplicates(new int[]{-3,-1,0,0,0,3,3}));
         System.out.println(solution80Ⅰ.removeDuplicatesⅠ(new int[]{-3, -1, 0, 0, 0, 3, 3}));
+        Solution80Ⅱ solution80Ⅱ = new Solution80Ⅱ();
+        System.out.println(solution80Ⅱ.removeDuplicates(new int[]{0,0,1,1,1,1,2,3,3}));
+        Solution80Ⅲ solution80Ⅲ = new Solution80Ⅲ();
+        System.out.println(solution80Ⅲ.removeDuplicates(new int[]{0, 0, 1, 1, 1, 1, 2, 3, 3}));
     }
     public int removeDuplicates(int[] nums){
         int count=1;
@@ -98,6 +102,59 @@ class Solution80Ⅰ{
                     count++;
                 }
                 else q++;
+            }
+        }
+        System.out.println(Arrays.toString(nums));
+        return p+1;
+    }
+}
+class Solution80Ⅱ{
+    public int removeDuplicates(int[] nums){
+        int n=nums.length;
+        int p=0,q=1;
+        int sames=1;
+        while (q<n){
+            if(nums[p]==nums[q]){
+                if(sames<2){
+                    sames++;
+                    nums[p+1]=nums[q];
+                    p++;
+                    q++;
+                }
+                else
+                    q++;
+            }
+            else {
+                sames=1;
+                nums[p+1]=nums[q];
+                p++;
+                q++;
+            }
+        }
+        return p+1;
+    }
+}
+class  Solution80Ⅲ{
+    public int removeDuplicates(int[] nums){
+        int n=nums.length;
+        int count=1;
+        int p=0,q=1;
+        while (q<n){
+            if(nums[p]==nums[q]){
+                if(count<2){
+                    nums[p+1]=nums[q];
+                    p++;
+                    q++;
+                    count++;
+                }
+                else
+                    q++;
+            }
+            else {
+                nums[p+1]=nums[q];
+                count=1;
+                p++;
+                q++;
             }
         }
         System.out.println(Arrays.toString(nums));

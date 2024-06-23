@@ -32,6 +32,12 @@ public class Heap {
         Heap5 heap5 = new Heap5();
         int[] heap2 = heap5.heap(new int[]{2, 3, 8, 1, 4, 9, 10, 7, 16, 14});
         System.out.println(Arrays.toString(heap2));
+        Heap6 heap6 = new Heap6();
+        int[] ints5 = heap6.heapSort(new int[]{2, 3, 8, 1, 4, 9, 10, 7, 16, 14});
+        System.out.println(Arrays.toString(ints5));
+        Heap7 heap7 = new Heap7();
+        int[] ints6 = heap7.heapSort(new int[]{2, 3, 8, 1, 4, 9, 10, 7, 16, 14});
+        System.out.println(Arrays.toString(ints6));
     }
 
     public void heapfy(int[] arr, int n, int i) {
@@ -315,5 +321,73 @@ class Heap5{
             heapfy(arr,i,0);
         }
         return arr;
+    }
+}
+class Heap6{
+    public void heapFy(int[] arr,int n,int i){
+        int left=2*i+1;
+        int right=2*i+2;
+        int largest=i;
+        if(left<n&&arr[largest]<arr[left])
+            largest=left;
+        if(right<n&&arr[largest]<arr[right])
+            largest=right;
+        if(largest!=i){
+            int temp=arr[i];
+            arr[i]=arr[largest];
+            arr[largest]=temp;
+            heapFy(arr,n,largest);
+        }
+    }
+    public int[] heapSort(int[] arr){
+        int n=arr.length;
+        for(int i=n/2-1;i>=0;i--)
+            heapFy(arr,n,i);
+        for(int i=n-1;i>=0;i--){
+            int temp=arr[0];
+            arr[0]=arr[i];
+            arr[i]=temp;
+            heapFy(arr,i,0);
+        }
+        return arr;
+    }
+}
+class Heap7{
+    public void heapfy(int[] arr,int n,int i){
+        int left=2*i+1;
+        int right=2*i+2;
+        int largest=i;
+        if(left<n&&arr[largest]<arr[left])
+            largest=left;
+        if(right<n&&arr[largest]<arr[right])
+            largest=right;
+        if(largest!=i){
+            int temp=arr[largest];
+            arr[largest]=arr[i];
+            arr[i]=temp;
+            heapfy(arr,n,largest);
+        }
+    }
+    public int[] heapSort(int[] arr){
+        int n= arr.length;
+        for(int i=n/2-1;i>=0;i--)
+            heapfy(arr,n,i);
+        for(int i=n-1;i>=0;i--){
+            int temp=arr[0];
+            arr[0]=arr[i];
+            arr[i]=temp;
+            heapfy(arr,i,0);
+        }
+        return arr;
+    }
+}
+class Pri{
+    public void pri(int[] arr){
+        PriorityQueue<Integer> priorityQueue=new PriorityQueue<>(new Comparator<Integer>(){
+            @Override
+            public int compare(Integer o1,Integer o2){
+                return o1-o2;
+            }
+        });
     }
 }
