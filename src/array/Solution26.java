@@ -12,6 +12,7 @@ public class Solution26 {
         Solution26 solution26 = new Solution26();
         System.out.println(solution26.removeDuplicates(new int[]{0, 0, 1, 1, 2}));
         Solution26Ⅰ solution26Ⅰ = new Solution26Ⅰ();
+        System.out.println(solution26Ⅰ.removeDuplicates(new int[]{0, 0, 1, 1, 2}));
 
     }
     public int removeDuplicates(int[] nums){

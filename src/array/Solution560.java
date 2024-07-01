@@ -19,6 +19,8 @@ public class Solution560 {
         System.out.println(solution560Ⅰ.subarraySum(new int[]{1, 2, 3}, 3));
         Solution560Ⅱ solution560Ⅱ = new Solution560Ⅱ();
         System.out.println(solution560Ⅱ.subarraySum(new int[]{1, 2, 3}, 3));
+        Solution560Ⅲ solution560Ⅲ = new Solution560Ⅲ();
+        System.out.println(solution560Ⅲ.subarraySum(new int[]{1, 2, 3}, 3));
     }
 //    public int subarraySum(int[] nums, int k){
 //        int left=0,right=0;
@@ -102,4 +104,27 @@ class Solution560Ⅱ{
         }
         return count;
     }
+}
+class Solution560Ⅲ{
+    public int subarraySum(int[] nums, int k){
+        HashMap<Integer, Integer> record = new HashMap<>();
+        int pre=0;
+        record.put(0,1);
+        int count=0;
+        for(int i=0;i<nums.length;i++){
+            pre+=nums[i];
+            if(record.containsKey(pre-k)){
+                count+=record.get(pre-k);
+            }
+            record.put(pre,record.getOrDefault(pre,0)+1);
+        }
+        return count;
+    }
+}
+abstract class a{
+    public void test(){
+        System.out.println("hello");
+    }
+    abstract void ters();
+
 }

@@ -21,6 +21,9 @@ public class Solution347 {
         Solution347Ⅱ solution347Ⅱ = new Solution347Ⅱ();
         int[] ints2 = solution347Ⅱ.topKFrequent(new int[]{1, 1, 1, 2, 2, 3}, 2);
         System.out.println(Arrays.toString(ints2));
+        Solution347Ⅲ solution347Ⅲ = new Solution347Ⅲ();
+        int[] ints3 = solution347Ⅲ.topKFrequent(new int[]{1, 1, 1, 2, 2, 3}, 2);
+        System.out.println(Arrays.toString(ints3));
     }
     public int[] topKFrequent(int[] nums, int k){
         int[] result = new int[k];
@@ -117,6 +120,35 @@ class Solution347Ⅱ{
         });
         while (!priorityQueue.isEmpty())
             result[index--]=priorityQueue.poll()[0];
+        return result;
+    }
+}
+class Solution347Ⅲ{
+    public int[] topKFrequent(int[] nums, int k){
+        PriorityQueue<int[]> priorityQueue=new PriorityQueue<>(new Comparator<int[]>() {
+            @Override
+            public int compare(int[] o1, int[] o2) {
+                return o1[1]-o2[1];
+            }
+        });
+        HashMap<Integer, Integer> hashMap = new HashMap<>();
+        for(int num:nums){
+            hashMap.put(num,hashMap.getOrDefault(num,0)+1);
+        }
+        hashMap.forEach((key,value)->{
+            if(priorityQueue.size()<k)
+                priorityQueue.offer(new int[]{key,value});
+            else if(value>priorityQueue.peek()[1]){
+                priorityQueue.poll();
+                priorityQueue.offer(new int[]{key,value});
+            }
+        });
+        int[] result = new int[k];
+        int index=k-1;
+        while (!priorityQueue.isEmpty()){
+            result[index--]=priorityQueue.poll()[0];
+        }
+        System.out.println(Arrays.toString(result));
         return result;
     }
 }
