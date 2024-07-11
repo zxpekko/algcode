@@ -1,5 +1,6 @@
 package array;
 
+import java.util.HashMap;
 import java.util.HashSet;
 
 /**
@@ -17,6 +18,8 @@ public class Solution3 {
         System.out.println(solution3Ⅱ.lengthOfLongestSubstring("abcabcbb"));
         Solution3Ⅲ solution3Ⅲ = new Solution3Ⅲ();
         System.out.println(solution3Ⅲ.lengthOfLongestSubstring("abcabcbb"));
+        SolutionⅣ solutionⅣ = new SolutionⅣ();
+        System.out.println(solutionⅣ.lengthOfLongestSubstring("abcabcbb"));
     }
     public int lengthOfLongestSubstring(String s){
         int n=s.length();
@@ -96,6 +99,23 @@ class Solution3Ⅲ{
             }
         }
         System.out.println(resultStr);
+        return result;
+    }
+}
+class SolutionⅣ{
+    public int lengthOfLongestSubstring(String s){
+        HashSet<Character> record = new HashSet<>();
+        int right=-1,result=0;
+        for(int i=0;i<s.length();i++){
+            if(i!=0)
+                record.remove(s.charAt(i-1));
+            while (right+1<s.length()&&!record.contains(s.charAt(right+1))){
+                record.add(s.charAt(right+1));
+                right++;
+            }
+            result=Math.max(result,right-i+1);
+        }
+
         return result;
     }
 }

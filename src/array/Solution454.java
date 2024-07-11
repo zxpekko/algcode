@@ -16,6 +16,8 @@ public class Solution454 {
         Solution454Ⅰ solution454Ⅰ = new Solution454Ⅰ();
         System.out.println(solution454Ⅰ.fourSumCount(new int[]{0, 1, -1}, new int[]{-1, 1, 0}, new int[]{0, 0, 1}, new int[]{-1, 1, 1}));
         System.out.println(solution454Ⅰ.fourSumCount(new int[]{1, 2}, new int[]{-2, -1}, new int[]{-1, 2}, new int[]{0, 2}));
+        Solution454Ⅱ solution454Ⅱ = new Solution454Ⅱ();
+        System.out.println(solution454Ⅱ.fourSumCount(new int[]{1, 2}, new int[]{-2, -1}, new int[]{-1, 2}, new int[]{0, 2}));
     }
     public int fourSumCount(int[] nums1, int[] nums2, int[] nums3, int[] nums4){
         Map<Integer,Integer> record=new HashMap<>();
@@ -57,6 +59,44 @@ class Solution454Ⅰ{
             for(int j=0;j<nums4.length;j++){
                 int sum=nums3[i]+nums4[j];
                 result+=record.getOrDefault(-sum,0);
+            }
+        }
+        return result;
+    }
+}
+class Solution454Ⅱ{
+    public int fourSumCount(int[] nums1, int[] nums2, int[] nums3, int[] nums4){
+        HashMap<Integer, Integer> hashMap = new HashMap<>();
+        for(int i=0;i<nums1.length;i++){
+            for(int j=0;j<nums2.length;j++){
+                int sum=nums1[i]+nums2[j];
+                hashMap.put(sum,hashMap.getOrDefault(sum,0)+1);
+            }
+        }
+        int result=0;
+        for(int i=0;i<nums3.length;i++){
+            for(int j=0;j<nums4.length;j++){
+                int sum=nums3[i]+nums4[j];
+                result+=hashMap.getOrDefault(-sum,0);
+            }
+        }
+        return result;
+    }
+}
+class Solution454Ⅲ{
+    public int fourSumCount(int[] nums1, int[] nums2, int[] nums3, int[] nums4){
+        HashMap<Integer, Integer> hashMap = new HashMap<>();
+        for(int i=0;i<nums1.length;i++){
+            for(int j=0;j<nums2.length;j++){
+                int sum=nums1[i]+nums2[j];
+                hashMap.put(sum,hashMap.getOrDefault(sum,0)+1);
+            }
+        }
+        int result=0;
+        for(int i=0;i<nums3.length;i++){
+            for(int j=0;j<nums4.length;j++){
+                int sum=nums3[i]+nums4[j];
+                result+=hashMap.getOrDefault(-sum,0);
             }
         }
         return result;
