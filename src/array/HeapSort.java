@@ -39,6 +39,9 @@ public class HeapSort {
         HeapSort1 heapSort1 = new HeapSort1();
         int[] ints8 = heapSort1.heapSort(new int[]{3, 5, 1, 3, 9, 7, 5, 6, -1});
         System.out.println(Arrays.toString(ints8));
+        HeapSort2 heapSort2 = new HeapSort2();
+        int[] ints9 = heapSort2.heapSort(new int[]{3, 5, 1, 3, 9, 7, 5, 6, -1});
+        System.out.println(Arrays.toString(ints9));
     }
     /**
      * @param arr 传入数组
@@ -323,6 +326,48 @@ class HeapSort1{
             heapfy(arr,n,largest);
         }
     }
+    public int[] heapSort(int[] arr){
+        int n=arr.length;
+        for(int i=n/2-1;i>=0;i--){
+            heapfy(arr,n,i);
+        }
+        for(int i=n-1;i>=0;i--){
+            int temp=arr[0];
+            arr[0]=arr[i];
+            arr[i]=temp;
+            heapfy(arr,i,0);
+        }
+        return arr;
+    }
+}
+class HeapSort2{
+    /**
+     *
+     * @param arr
+     * @param n
+     * @param i
+     */
+    public void heapfy(int[] arr,int n,int i){
+       int left=2*i+1;
+       int right=2*i+2;
+       int largest=i;
+       if(left<n&&arr[left]>arr[largest])
+           largest=left;
+       if(right<n&&arr[right]>arr[largest])
+           largest=right;
+       if(largest!=i){
+           int temp=arr[i];
+           arr[i]=arr[largest];
+           arr[largest]=temp;
+           heapfy(arr,n,largest);
+       }
+    }
+
+    /**
+     *
+     * @param arr
+     * @return
+     */
     public int[] heapSort(int[] arr){
         int n=arr.length;
         for(int i=n/2-1;i>=0;i--){

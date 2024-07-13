@@ -15,6 +15,8 @@ public class Solution93 {
         System.out.println(solution93.restoreIpAddresses("19216811"));
         Solution93Ⅱ solution93Ⅱ = new Solution93Ⅱ();
         System.out.println(solution93Ⅱ.restoreIpAddresses("19216811"));
+        Solution93Ⅲ solution93Ⅲ = new Solution93Ⅲ();
+        System.out.println(solution93Ⅲ.restoreIpAddresses("19216811"));
     }
     List<String> result=new ArrayList<>();
     public List<String> restoreIpAddresses(String s){
@@ -74,6 +76,40 @@ class Solution93Ⅱ{
 
     }
     public boolean isValidString(String s){
+        if(s.length()>3||s.length()<1)
+            return false;
+        if(s.length()>1&&s.charAt(0)=='0')
+            return false;
+        if(Integer.parseInt(s)>255)
+            return false;
+        return true;
+    }
+}
+class Solution93Ⅲ{
+    List<String> result=new ArrayList<>();
+    public List<String> restoreIpAddresses(String s){
+        if(s.length()<4)
+            return result;
+        dfs(s,0,0);
+        return result;
+    }
+    public void dfs(String s,int pointNum,int start){
+        if(pointNum==3){
+            if(isValid(s.substring(start)))
+                result.add(s);
+            return;
+        }
+        for(int i=start;i<s.length();i++){
+            if(isValid(s.substring(start,i+1))){
+                s=s.substring(0,i+1)+"."+s.substring(i+1);
+                pointNum++;
+                dfs(s,pointNum,i+2);
+                s=s.substring(0,i+1)+s.substring(i+2);
+                pointNum--;
+            }
+        }
+    }
+    public boolean isValid(String s){
         if(s.length()>3||s.length()<1)
             return false;
         if(s.length()>1&&s.charAt(0)=='0')

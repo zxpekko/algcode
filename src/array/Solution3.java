@@ -20,6 +20,8 @@ public class Solution3 {
         System.out.println(solution3Ⅲ.lengthOfLongestSubstring("abcabcbb"));
         SolutionⅣ solutionⅣ = new SolutionⅣ();
         System.out.println(solutionⅣ.lengthOfLongestSubstring("abcabcbb"));
+        Solution3Ⅳ solution3Ⅳ = new Solution3Ⅳ();
+        System.out.println(solution3Ⅳ.lengthOfLongestSubstring("abcabcbb"));
     }
     public int lengthOfLongestSubstring(String s){
         int n=s.length();
@@ -116,6 +118,22 @@ class SolutionⅣ{
             result=Math.max(result,right-i+1);
         }
 
+        return result;
+    }
+}
+class Solution3Ⅳ{
+    public int lengthOfLongestSubstring(String s){
+        HashSet<Character> record = new HashSet<>();
+        int right=-1,result=0;
+        for(int i=0;i<s.length();i++){
+            if(i!=0)
+                record.remove(s.charAt(i-1));
+            while (right+1<s.length()&&!record.contains(s.charAt(right+1))){
+                record.add(s.charAt(right+1));
+                right++;
+            }
+            result=Math.max(result,right-i+1);
+        }
         return result;
     }
 }

@@ -32,6 +32,9 @@ public class Quick {
         Quick6 quick6 = new Quick6();
         int[] ints5 = quick6.quickSort(new int[]{2, 3, 8, 1, 4, 9, 10, 7, 16, 14});
         System.out.println(Arrays.toString(ints5));
+        Quick7 quick7 = new Quick7();
+        int[] quick8 = quick7.quick(new int[]{2, 3, 8, 1, 4, 9, 10, 7, 16, 14});
+        System.out.println(Arrays.toString(quick8));
 
     }
     public int[] quickSort(int[] arr){
@@ -219,5 +222,31 @@ class Quick6{
         }
         quick(arr,left,r-1);
         quick(arr,r+1,right);
+    }
+}
+class Quick7{
+    public int[] quick(int[] arr){
+        quickSort(arr,0,arr.length-1);
+        return arr;
+    }
+    public void quickSort(int[] arr,int left,int right){
+        if(left>=right)
+            return;
+        int l=left,r=right;
+        int pivot=arr[left];
+        while (l<r){
+            while (l<r&&arr[r]>=pivot)
+                r--;
+            if(l<r)
+                arr[l]=arr[r];
+            while (l<r&&arr[l]<=pivot)
+                l++;
+            if(l<r)
+                arr[r]=arr[l];
+            if(l==r)
+                arr[r]=pivot;
+        }
+        quickSort(arr,left,r-1);
+        quickSort(arr,r+1,right);
     }
 }

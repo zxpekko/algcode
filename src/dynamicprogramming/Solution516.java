@@ -16,6 +16,8 @@ public class Solution516 {
         System.out.println(solution516Ⅱ.longestPalindromeSubseq("cbbd"));
         Solution516Ⅲ solution516Ⅲ = new Solution516Ⅲ();
         System.out.println(solution516Ⅲ.longestPalindromeSubseq("bbbab"));
+        Solution516Ⅳ solution516Ⅳ = new Solution516Ⅳ();
+        System.out.println(solution516Ⅳ.longestPalindromeSubseq("bbbab"));
     }
     public int longestPalindromeSubseq(String s){
         int n=s.length();
@@ -73,6 +75,28 @@ class Solution516Ⅲ{
             for(int j=0;j<n;j++){
                 max=Math.max(max,dp[i][j]);
             }
+        }
+        return max;
+    }
+}
+class Solution516Ⅳ{
+    public int longestPalindromeSubseq(String s){
+        int n=s.length();
+        int[][] dp = new int[n][n];
+        for(int i=0;i<n;i++)
+            dp[i][i]=1;
+        for(int i=n-1;i>=0;i--){
+            for(int j=i+1;j<n;j++){
+                if(s.charAt(i)==s.charAt(j))
+                    dp[i][j]=dp[i+1][j-1]+2;
+                else
+                    dp[i][j]=Math.max(dp[i+1][j],dp[i][j-1]);
+            }
+        }
+        int max=0;
+        for(int i=0;i<n;i++){
+            for(int j=0;j<n;j++)
+                max=Math.max(max,dp[i][j]);
         }
         return max;
     }

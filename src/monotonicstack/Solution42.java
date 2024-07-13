@@ -19,6 +19,8 @@ public class Solution42 {
         System.out.println(solution42Ⅱ.trap(new int[]{4, 2, 0, 3, 2, 5}));
         Solution42Ⅲ solution42Ⅲ = new Solution42Ⅲ();
         System.out.println(solution42Ⅲ.trap(new int[]{4, 2, 0, 3, 2, 5}));
+        Solution42Ⅳ solution42Ⅳ = new Solution42Ⅳ();
+        System.out.println(solution42Ⅳ.trap(new int[]{4, 2, 0, 3, 2, 5}));
     }
     public int trap(int[] height){
         int n=height.length;
@@ -90,6 +92,24 @@ class Solution42Ⅲ{
                     int width=i-stack.peek()-1;
                     int h=Math.min(height[i],height[stack.peek()])-height[pop];
                     result+=(width*h);
+                }
+            }
+            stack.push(i);
+        }
+        return result;
+    }
+}
+class Solution42Ⅳ{
+    public int trap(int[] height){
+        Stack<Integer> stack = new Stack<>();
+        int result=0;
+        for(int i=0;i< height.length;i++){
+            while (!stack.isEmpty()&&height[i]>height[stack.peek()]){
+                Integer mid = stack.pop();
+                if(stack.size()>0){
+                    int h=Math.min(height[i],height[stack.peek()])-height[mid];
+                    int w=i-stack.peek()-1;
+                    result+=(h*w);
                 }
             }
             stack.push(i);

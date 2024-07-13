@@ -1,5 +1,7 @@
 package array;
 
+import com.sun.xml.internal.org.jvnet.mimepull.CleanUpExecutorFactory;
+
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.PriorityQueue;
@@ -21,6 +23,7 @@ public class MergeSort {
         int[] arr6 = {14, 12, 15, 13, 11, 16};
         int[] arr7 = {14, 12, 15, 13, 11, 16};
         int[] arr8 = {14, 12, 15, 13, 11, 16};
+        int[] arr9 = {14, 12, 15, 13, 11, 16};
         mergeSort.mergeSort(arr,0,arr.length-1);
         System.out.println(Arrays.toString(arr));
         MergeSort1 mergeSort1 = new MergeSort1();
@@ -45,6 +48,10 @@ public class MergeSort {
         System.out.println(Arrays.toString(bubble));
         int[] ints4 = mergeSort7.mergeSort(arr8, 0, arr8.length - 1);
         System.out.println(Arrays.toString(ints4));
+        MergeSort8 mergeSort8 = new MergeSort8();
+        int[] merge = mergeSort8.merge(arr9,0, arr9.length-1);
+        System.out.println(Arrays.toString(merge));
+
     }
     public void mergeSort(int[] arr,int low,int high){
         if(low<high){
@@ -330,5 +337,34 @@ class MergeSort7{
             arr[index++]=copy[l++];
         while (r<=right)
             arr[index++]=copy[r++];
+    }
+}
+class MergeSort8{
+    public int[] merge(int[] arr,int left,int right){
+        if(left<right){
+            int mid=(left+right)/2;
+            merge(arr,left,mid);
+            merge(arr,mid+1,right);
+            mergeSort(arr,left,right,mid);
+        }
+        return arr;
+    }
+    public void mergeSort(int[] arr,int left,int right,int mid){
+        int n=arr.length;
+        int[] copies = new int[n];
+        for(int i=0;i<n;i++){
+            copies[i]=arr[i];
+        }
+        int l=left,r=mid+1,index=left;
+        while (l<=mid&&r<=right){
+            if(copies[l]<=copies[r])
+                arr[index++]=copies[l++];
+            else
+                arr[index++]=copies[r++];
+        }
+        while (l<=mid)
+            arr[index++]=copies[l++];
+        while (r<=right)
+            arr[index++]=copies[r++];
     }
 }
