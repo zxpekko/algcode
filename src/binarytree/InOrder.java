@@ -73,3 +73,44 @@ class InorderⅠ{
         return result;
     }
 }
+class InorderⅡ{
+    public void inorder(TreeNode root,List<TreeNode> result){
+        if(root==null)
+            return;
+        Stack<TreeNode> stack = new Stack<>();
+//        stack.push(root);
+        TreeNode cur=root;
+        while (!stack.isEmpty()||cur!=null){
+            if(cur!=null){
+                stack.push(cur);
+                cur=cur.left;
+            }
+            else {
+                TreeNode pop = stack.pop();
+                result.add(pop);
+                cur=pop.right;
+            }
+        }
+    }
+}
+class InorderⅢ{
+    List<TreeNode> result=new ArrayList<>();
+    public List<TreeNode> inorder(TreeNode root){
+        if(root==null)
+            return result;
+        Stack<TreeNode> stack=new Stack<>();
+        TreeNode cur=root;
+        while (!stack.isEmpty()||cur!=null){
+            if(cur!=null){
+                stack.push(cur);
+                cur=cur.left;
+            }
+            else {
+                TreeNode pop = stack.pop();
+                result.add(pop);
+                cur=pop.right;
+            }
+        }
+        return result;
+    }
+}

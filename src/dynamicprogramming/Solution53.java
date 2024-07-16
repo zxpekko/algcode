@@ -13,6 +13,8 @@ public class Solution53 {
         System.out.println(solution53.maxSubArray(new int[]{-2, 1, -3, 4, -1, 2, 1, -5, 4}));
         Solution53Ⅰ solution53Ⅰ = new Solution53Ⅰ();
         System.out.println(solution53Ⅰ.maxSubArray(new int[]{-2, 1, -3, 4, -1, 2, 1, -5, 4}));
+        Solution53Ⅱ solution53Ⅱ = new Solution53Ⅱ();
+        System.out.println(solution53Ⅱ.maxSubArray(new int[]{-2, 1, -3, 4, -1, 2, 1, -5, 4}));
     }
     public int maxSubArray(int[] nums){
         int n=nums.length;
@@ -43,6 +45,21 @@ class Solution53Ⅰ{
         int max=dp[0];
         for(int i=0;i<n;i++)
             max=Math.max(max,dp[i]);
+        return max;
+    }
+}
+class Solution53Ⅱ{
+    public int maxSubArray(int[] nums){
+        int n=nums.length;
+        int[] dp = new int[n];
+        dp[0]=nums[0];
+        for(int i=1;i<n;i++){
+            dp[i]=Math.max(dp[i-1]+nums[i],nums[i]);
+        }
+        int max=dp[0];
+        for(int i=0;i<n;i++){
+            max=Math.max(max,dp[i]);
+        }
         return max;
     }
 }

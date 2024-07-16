@@ -49,3 +49,30 @@ class PostOrderⅠ{
         return result;
     }
 }
+class PostOrderⅡ{
+    public void postOrder1(TreeNode root,List<TreeNode> result){
+        if(root==null)
+            return;
+        postOrder1(root.left,result);
+        postOrder1(root.right,result);
+        result.add(root);
+    }
+    public void postOrder(TreeNode root,List<TreeNode> result){
+        if(root==null)
+            return;
+        Stack<TreeNode> stack = new Stack<>();
+        stack.push(root);
+        List<TreeNode> midResult=new ArrayList<>();
+        while (!stack.isEmpty()){
+            TreeNode pop = stack.pop();
+            midResult.add(pop);
+            if(pop.left!=null)
+                stack.push(pop.left);
+            if(pop.right!=null)
+                stack.push(pop.right);
+        }
+        for(int i=midResult.size()-1;i>=0;i++){
+            result.add(midResult.get(i));
+        }
+    }
+}

@@ -90,3 +90,9 @@ class Solution300Ⅲ{
         return max;
     }
 }
+class Solution300Ⅳ{
+    public int lengthOfLIS(int[] nums){
+        
+        return 0;
+    }
+}
