@@ -18,6 +18,8 @@ public class Solution40 {
         System.out.println(solution40.combinationSum2(new int[]{10, 1, 2, 7, 6, 1, 5}, 8));
         Solution40Ⅰ solution40Ⅰ = new Solution40Ⅰ();
         System.out.println(solution40Ⅰ.combinationSum2(new int[]{10, 1, 2, 7, 6, 1, 5}, 8));
+        SolutionⅡ solutionⅡ = new SolutionⅡ();
+        System.out.println(solutionⅡ.combinationSum2(new int[]{10, 1, 2, 7, 6, 1, 5}, 8));
     }
     public List<List<Integer>> combinationSum2(int[] candidates, int target){
         Arrays.sort(candidates);
@@ -71,6 +73,34 @@ class Solution40Ⅰ{
             subResult.remove(subResult.size()-1);
             record[i]=false;
             target+=candidates[i];
+        }
+    }
+}
+class SolutionⅡ{
+    List<List<Integer>> result=new ArrayList<>();
+    List<Integer> subResult=new ArrayList<>();
+    public List<List<Integer>> combinationSum2(int[] candidates, int target){
+        Arrays.sort(candidates);
+        int n=candidates.length;
+        boolean[] visited= new boolean[n];
+        dfs(candidates,0,target,visited);
+        return result;
+    }
+    public void dfs(int[] candidates,int start,int target,boolean[] visited){
+        if(target==0){
+            result.add(new ArrayList<>(subResult));
+            return;
+        }
+        for(int i=start;i<candidates.length;i++){
+            if(i!=start&&candidates[i]==candidates[i-1]&&!visited[i-1])
+                continue;
+            subResult.add(candidates[i]);
+            target-=candidates[i];
+            visited[i]=true;
+            dfs(candidates,i+1,target,visited);
+            subResult.remove(subResult.size()-1);
+            target+=candidates[i];
+            visited[i]=false;
         }
     }
 }
