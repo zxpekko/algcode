@@ -13,6 +13,8 @@ public class Solution45 {
         System.out.println(solution45.jump(new int[]{2, 3, 1, 1, 4}));
         Solution45Ⅱ solution45Ⅱ = new Solution45Ⅱ();
         System.out.println(solution45Ⅱ.jump(new int[]{3, 2, 1, 0, 4}));
+        Solution45Ⅲ solution45Ⅲ = new Solution45Ⅲ();
+        System.out.println(solution45Ⅲ.jump(new int[]{3, 2, 1, 0, 4}));
 
     }
     public int jump(int[] nums){
@@ -64,5 +66,26 @@ class Solution45Ⅱ{
                 return -1;
         }
         return steps;
+    }
+}
+class Solution45Ⅲ{
+    public int jump(int[] nums){
+        int n=nums.length;
+        int position=n-1;
+        int step=0;
+        while (position>0){
+            boolean flag=false;
+            for(int i=0;i<position;i++){
+                if(i+nums[i]>=position){
+                    position=i;
+                    step++;
+                    flag=true;
+                    break;
+                }
+            }
+            if(!flag)
+                return -1;
+        }
+        return step;
     }
 }

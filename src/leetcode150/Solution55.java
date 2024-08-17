@@ -13,6 +13,8 @@ public class Solution55 {
         System.out.println(solution55Ⅰ.canJump(new int[]{3, 2, 1, 0, 4}));
         Solution55Ⅱ solution55Ⅱ = new Solution55Ⅱ();
         System.out.println(solution55Ⅱ.canJump(new int[]{3, 2, 1, 0, 4}));
+        Solution55Ⅳ solution55Ⅳ = new Solution55Ⅳ();
+        System.out.println(solution55Ⅳ.canJump(new int[]{3, 2, 1, 0, 4}));
     }
     public boolean canJump(int[] nums){
         int n=nums.length;
@@ -74,5 +76,18 @@ class Solution55Ⅲ{
                 return false;
         }
         return false;
+    }
+}
+class Solution55Ⅳ{
+    public boolean canJump(int[] nums){
+        int rightMost=0;
+        int n=nums.length;
+        for(int i=0;i<n;i++){
+            if(i<=rightMost){
+                rightMost=Math.max(rightMost,i+nums[i]);
+            }
+            else return false;
+        }
+        return true;
     }
 }
