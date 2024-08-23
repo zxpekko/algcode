@@ -22,7 +22,28 @@ public class Dijkstra {
             }
             visited[k]=true;
             for(int m=0;m<n;m++){
-                if(shortest[k]+adj[k][m]<shortest[m])
+                if(adj[k][m]!=Integer.MAX_VALUE&&shortest[k]+adj[k][m]<shortest[m])
+                    shortest[m]=shortest[k]+adj[k][m];
+            }
+        }
+        return shortest;
+    }
+}
+class DijkstraⅠ{
+    public int[] dijkstra(int[][] adj,int source){
+        int[] shortest = new int[adj.length];
+        Arrays.fill(shortest,Integer.MAX_VALUE);
+        shortest[source]=0;
+        boolean[] visited = new boolean[adj.length];
+        for(int i=0;i<adj.length;i++){
+            int k=-1;
+            for(int j=0;j<adj.length;j++){
+                if(!visited[j]&&(k==-1||shortest[j]<shortest[k]))
+                    k=j;
+            }
+            visited[k]=true;
+            for(int m=0;m<adj.length;m++){
+                if(adj[k][m]!=Integer.MAX_VALUE&&shortest[k]+adj[k][m]<shortest[m])
                     shortest[m]=shortest[k]+adj[k][m];
             }
         }
