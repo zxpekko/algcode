@@ -17,6 +17,7 @@ public class Solution918 {
         System.out.println(solution918.maxSubarraySumCircular2(new int[]{-3, -2, -3}));
         Solution918Ⅰ solution918Ⅰ = new Solution918Ⅰ();
         System.out.println(solution918Ⅰ.maxSubarraySumCircular(new int[]{-3, -2, -3}));
+
     }
     public int maxSubarraySumCircular(int[] nums){//超时
         int n=nums.length;
@@ -95,6 +96,27 @@ class Solution918Ⅰ{
         for(int i=nums.length-1;i>0;i--){
             rightSum+=nums[i];
             res=Math.max(res,rightSum+leftMax[i-1]);
+        }
+        return res;
+    }
+}
+class Solution918Ⅱ{
+    public int maxSubarraySumCircular(int[] nums){
+        int n=nums.length;
+        int[] leftMax=new int[n];
+        int leftSum=nums[0];
+        leftMax[0]=nums[0];
+        int curMax=nums[0],res=nums[0];
+        for(int i=1;i<n;i++){
+            curMax=Math.max(nums[i],nums[i]+curMax);
+            res=Math.max(res,curMax);
+            leftSum+=nums[i];
+            leftMax[i]=Math.max(leftMax[i-1],leftSum);
+        }
+        int rightSum=0;
+        for(int j=n-1;j>0;j--){
+            rightSum+=nums[j];
+            res=Math.max(res,rightSum+leftMax[j-1]);
         }
         return res;
     }
