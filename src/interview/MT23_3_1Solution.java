@@ -2,6 +2,9 @@ package interview;
 
 import java.util.HashMap;
 import java.util.Scanner;
+import java.util.concurrent.locks.Condition;
+import java.util.concurrent.locks.LockSupport;
+import java.util.concurrent.locks.ReentrantLock;
 
 /**
  * @Author:zxp

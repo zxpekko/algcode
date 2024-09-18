@@ -1,5 +1,7 @@
 package leetcode150;
 
+import java.util.List;
+
 /**
  * @Author:zxp
  * @Description:
@@ -14,6 +16,20 @@ public class Solution141 {
             return false;
         ListNode fast=head;
         ListNode slow=head;
+        while (fast.next!=null&&fast.next.next!=null){
+            fast=fast.next.next;
+            slow=slow.next;
+            if(fast==slow)
+                return true;
+        }
+        return false;
+    }
+}
+class Solution141Ⅰ{
+    public boolean hasCycle(ListNode head){
+        if(head==null)
+            return false;
+        ListNode fast=head,slow=head;
         while (fast.next!=null&&fast.next.next!=null){
             fast=fast.next.next;
             slow=slow.next;

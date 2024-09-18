@@ -12,6 +12,8 @@ public class Solution42 {
     public static void main(String[] args) {
         Solution42 solution42 = new Solution42();
         System.out.println(solution42.trap(new int[]{0, 1, 0, 2, 1, 0, 1, 3, 2, 1, 2, 1}));
+        Solution42Ⅰ solution42Ⅰ = new Solution42Ⅰ();
+        System.out.println(solution42Ⅰ.trap(new int[]{0, 1, 0, 2, 1, 0, 1, 3, 2, 1, 2, 1}));
     }
     public int trap(int[] height){
         int n=height.length;
@@ -25,6 +27,24 @@ public class Solution42 {
                     int h= Math.min(height[left],height[i])-height[mid];
                     int w=i-left-1;
                     result+=(h*w);
+                }
+            }
+            stack.push(i);
+        }
+        return result;
+    }
+}
+class Solution42Ⅰ{
+    public int trap(int[] height){
+        Stack<Integer> stack=new Stack<>();
+        int result=0;
+        for(int i=0;i<height.length;i++){
+            while (!stack.isEmpty()&&height[i]>height[stack.peek()]){
+                Integer mid = stack.pop();
+                if(!stack.isEmpty()){
+                    int width=i-stack.peek()-1;
+                    int h=Math.min(height[i],height[stack.peek()])-height[mid];
+                    result+=(width*h);
                 }
             }
             stack.push(i);
