@@ -77,7 +77,7 @@ class Solution3Ⅲ{
             if(i!=0)
                 record.remove(s.charAt(i-1));
             while (right+1<n&&!record.contains(s.charAt(right+1))){
-                record.add(s.charAt(right=1));
+                record.add(s.charAt(right+1));
                 right++;
             }
             result=Math.max(result,right-i+1);
