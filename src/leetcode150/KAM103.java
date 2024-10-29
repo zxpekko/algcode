@@ -43,6 +43,7 @@ public class KAM103 {
         }
     }
     static int[][] directions={{1,0},{-1,0},{0,1},{0,-1}};
+//    static int[][] directions1={{1,0},{-1,0},{0,1},{0,-1}};
 //    public static void fdfs(int[][] grid,int row,int col,boolean[][][] visited){
 //        if(visited[0][row][col])
 //            return;
